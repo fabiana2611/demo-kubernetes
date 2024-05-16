@@ -1,0 +1,2 @@
+{ "name": "User A", "username": "user1", "pwd": "123 }
+{ "name": "User B", "username": "user2", "pwd": "456 }

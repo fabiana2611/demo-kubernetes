@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-deploy
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-k8s
+  template:
+    metadata:
+      labels:
+        app: demo-k8s
+    spec:
+      containers:
+        - name: demo-k8s
+          image: fabianafreire/demo-volume
+          env:
+            - name: FOLDER
+              valueFrom: 
+                configMapKeyRef:
+                  name: demo-env
+                  key: folder
+          volumeMounts:
+            - mountPath: /app/storage
+              name: demo-storage
+      volumes:
+        - name: demo-storage
+          persistentVolumeClaim:
+            claimName: demo-pvc
